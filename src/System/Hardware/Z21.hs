@@ -6,6 +6,7 @@ import qualified Data.Conduit.List as CL
 import Data.Conduit.Serialization.Binary
 import Data.Conduit.Network.UDP
 import Data.Conduit
+import Data.Binary
 
 import System.Hardware.Z21.Types
 

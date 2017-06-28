@@ -17,6 +17,7 @@ library
   exposed-modules:     System.Hardware.Z21
                      , System.Hardware.Z21.Types
   build-depends:       base >= 4.7 && < 5
+                     , base16-bytestring
                      , binary-conduit
                      , conduit-extra
                      , conduit

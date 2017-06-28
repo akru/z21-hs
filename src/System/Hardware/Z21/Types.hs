@@ -1,6 +1,7 @@
 {-# LANGUAGE GADTs #-}
 module System.Hardware.Z21.Types where
 
+import qualified Data.ByteString.Base16.Lazy as B16
 import Data.Binary.Get
 import Data.Binary.Put
 import Data.Binary
@@ -21,7 +22,7 @@ instance Binary Packet where
         put dat
 
 instance Show Packet where
-    show = show . encode
+    show = show . B16.encode . encode
 
 newtype Address = Address Word16
   deriving (Eq, Ord, Show)
