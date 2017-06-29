@@ -24,7 +24,7 @@ instance Binary Packet where
         return (Packet hdr dat)
 
     put (Packet hdr dat) = do
-        putWord16le $ fromIntegral (LBS.length $ encode dat)
+        putWord16le $ fromIntegral (LBS.length (encode dat) + 4)
         putWord16le hdr
         put dat
 
