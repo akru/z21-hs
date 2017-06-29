@@ -16,6 +16,7 @@ library
   hs-source-dirs:      src
   exposed-modules:     System.Hardware.Z21
                      , System.Hardware.Z21.Types
+                     , System.Hardware.Z21.Actions
   build-depends:       base >= 4.7 && < 5
                      , base16-bytestring
                      , binary-conduit
