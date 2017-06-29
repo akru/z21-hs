@@ -1,5 +1,6 @@
 module System.Hardware.Z21.Actions where
 
+import Control.Monad.IO.Class (liftIO)
 import System.Hardware.Z21.Types
 import Data.Maybe (fromJust)
 import Data.Conduit
@@ -28,3 +29,6 @@ getTurnoutMode a = do
 
 setTurnoutMode :: Address -> Word8 -> Z21 ()
 setTurnoutMode a m = yield (SetTurnout a m)
+
+zprint :: Show a => a -> Z21 ()
+zprint = liftIO . print
