@@ -5,7 +5,9 @@ import System.Hardware.Z21.XBus
 
 import Control.Monad.IO.Class (liftIO)
 import System.Hardware.Z21.Types
+import qualified Data.ByteString.Base16.Lazy as B16
 import qualified Data.ByteString.Lazy as LBS
+import Data.ByteString.Lazy (ByteString)
 import Data.Maybe (fromJust)
 import Data.Conduit
 import Data.Binary
@@ -32,8 +34,17 @@ unpack (Packet _ dat) =
 zprint :: Show a => a -> Z21 ()
 zprint = liftIO . print
 
-getSerial :: Z21 (Maybe Word16)
+getSerial :: Z21 (Maybe Word32)
 getSerial = do
     yield $ pack GetSerial
     res <- await
     return (res >>= unpack)
+
+getLocoInfo :: Address -> Z21 (Maybe ByteString)
+getLocoInfo a = do
+    yield $ pack (XGetLocoInfo a)
+    res <- await
+    return (B16.encode . xbusData <$> (res >>= unpack))
+
+setLocoDrive :: Address -> Word8 -> Word8 -> Z21 ()
+setLocoDrive a s rv = yield $ pack (XSetLocoDrive a s rv)
